@@ -1,0 +1,24 @@
+:host {
+  border: 1px solid #666;
+  background-color: #ccc;
+  display: block;
+  position: relative;
+}
+
+/* To ensure your styling works under the Shadow DOM polyfill, see
+   www.polymer-project.org/docs/polymer/styling.html#directives */
+/* polyfill-next-selector { content: ':host > h2'; } */
+::content scribe-content {
+  display: block;
+  background-color: white;
+  padding: 0.5em 0.5em;
+}
+
+.marker {
+  color: white;
+  background: #7777cc;
+  position: absolute;
+  padding: 2px 4px;
+  top: 0;
+  right: 0;
+}

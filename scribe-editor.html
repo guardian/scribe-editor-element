@@ -1,0 +1,185 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<script src="../requirejs/require.js"></script>
+
+<script src="../scribe/scribe.js"></script>
+
+<script>
+function hackyDelay(func) {
+  setTimeout(func, 100);
+}
+</script>
+
+
+<!--
+Element providing solution to no problem in particular.
+
+##### Example
+
+    <scribe-editor></scribe-editor>
+
+@element scribe-editor
+@blurb Element providing solution to no problem in particular.
+@status alpha
+@homepage http://polymerlabs.github.io/seed-element
+-->
+<polymer-element name="scribe-editor" attributes="value">
+
+  <template>
+
+    <link rel="stylesheet" href="scribe-editor.css" />
+
+    <span class="marker">Scribe</span>
+
+    <content></content>
+
+  </template>
+
+<script>
+require(['scribe'], function(Scribe) {
+
+    Polymer('scribe-editor', {
+      /**
+       * The `author` attribute sets an initial author
+       *
+       * @attribute author
+       * @type string
+       * @default 'Sébastien Cevey'
+       */
+      author: 'Sébastien Cevey',
+
+      ready: function() {
+        var contentContainer = this.querySelector('scribe-content');
+        this.scribe = new Scribe(contentContainer);
+
+        this.addEventListener('scribe:load-plugin', function(event) {
+          this.scribe.use(event.detail);
+        }.bind(this));
+
+        // FIXME: fire on-change event
+        this.scribe.on('content-changed', this.updateValue.bind(this));
+        this.updateValue();
+      },
+
+      updateValue: function() {
+        this.value = this.scribe.getContent();
+      }
+    });
+
+});
+</script>
+
+</polymer-element>
+
+
+
+<script src="../scribe-plugin-toolbar/scribe-plugin-toolbar.js"></script>
+
+<polymer-element name="scribe-toolbar">
+
+<script>
+require(['scribe-plugin-toolbar'], function(scribeToolbarPlugin) {
+
+    Polymer('scribe-toolbar', {
+      ready: function() {
+        // FIXME: hacky delay to fix init order...
+        hackyDelay(function() {
+          var plugin = scribeToolbarPlugin(this);
+          this.fire('scribe:load-plugin', plugin);
+        }.bind(this));
+      }
+    });
+
+});
+</script>
+
+</polymer-element>
+
+
+<!-- <polymer-element name="scribe-button" attributes="command"> -->
+
+<!--   <template> -->
+
+<!--     <\!-- <button on-click="{{run}}"><content></content></button> -\-> -->
+<!--     <button data-command-name="{{this.command}}"><content></content></button> -->
+
+<!--   </template> -->
+
+<!-- <script> -->
+<!-- require(['scribe'], function(Scribe) { -->
+
+<!--     Polymer('scribe-button', { -->
+<!--       ready: function() { -->
+<!--       }, -->
+<!--     }); -->
+<!-- }); -->
+<!-- </script> -->
+
+<!-- </polymer-element> -->
+
+
+
+
+<script src="../scribe-plugin-curly-quotes/scribe-plugin-curly-quotes.js"></script>
+
+<polymer-element name="scribe-plugin-curly-quotes">
+
+<script>
+require(['scribe-plugin-curly-quotes'], function(scribePluginCurlyQuotes) {
+    Polymer('scribe-plugin-curly-quotes', {
+      ready: function() {
+        // FIXME: hacky delay to fix init order...
+        hackyDelay(function() {
+          this.fire('scribe:load-plugin', scribePluginCurlyQuotes());
+        }.bind(this));
+      }
+    });
+});
+</script>
+
+</polymer-element>
+
+
+
+
+<script src="../scribe-plugin-smart-lists/scribe-plugin-smart-lists.js"></script>
+
+<polymer-element name="scribe-plugin-smart-lists">
+
+<script>
+require(['scribe-plugin-smart-lists'], function(scribePluginSmartLists) {
+    Polymer('scribe-plugin-smart-lists', {
+      ready: function() {
+        // FIXME: hacky delay to fix init order...
+        hackyDelay(function() {
+          this.fire('scribe:load-plugin', scribePluginSmartLists());
+        }.bind(this));
+      }
+    });
+});
+</script>
+
+</polymer-element>
+
+
+
+
+<script src="../scribe-plugin-formatter-html-ensure-semantic-elements/scribe-plugin-formatter-html-ensure-semantic-elements.js"></script>
+
+<polymer-element name="scribe-formatter-html-ensure-semantic-elements">
+
+<script>
+require(['scribe-plugin-formatter-html-ensure-semantic-elements'], function(scribeFormatterSemanticElements) {
+
+    Polymer('scribe-formatter-html-ensure-semantic-elements', {
+      ready: function() {
+        // FIXME: hacky delay to fix init order...
+        hackyDelay(function() {
+          this.fire('scribe:load-plugin', scribeFormatterSemanticElements());
+        }.bind(this));
+      }
+    });
+});
+</script>
+
+</polymer-element>

@@ -14,6 +14,12 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#~0.3.4",
-    "polymer-test-tools": "Polymer/polymer-test-tools#~0.3.3"
+    "polymer-test-tools": "Polymer/polymer-test-tools#~0.3.3",
+    "scribe": "~0.1.17",
+    "requirejs": "~2.1.14",
+    "scribe-plugin-smart-lists": "~0.1.4",
+    "scribe-plugin-toolbar": "~0.1.4",
+    "scribe-plugin-formatter-html-ensure-semantic-elements": "~1.0.1",
+    "scribe-plugin-curly-quotes": "~0.1.7"
   }
 }

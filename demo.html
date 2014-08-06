@@ -5,16 +5,40 @@
   <title>seed-element Demo</title>
 
   <script src="../platform/platform.js"></script>
-  <link rel="import" href="seed-element.html">
+  <link rel="import" href="scribe-editor.html">
 
 </head>
 <body unresolved>
 
-  <p>An example of using <code>&lt;seed-element></code>:</p>
+  <p>An example of using <code>&lt;scribe-editor&gt;</code>:</p>
 
-  <seed-element>
-    <h2>Hello seed-element</h2>
-  </seed-element>
+  <template is="auto-binding">
+
+    <scribe-editor value="{{html}}">
+      <scribe-plugin-curly-quotes></scribe-plugin-curly-quotes>
+      <scribe-plugin-smart-lists></scribe-plugin-smart-lists>
+      <scribe-formatter-html-ensure-semantic-elements></scribe-formatter-html-ensure-semantic-elements>
+
+      <scribe-toolbar>
+        <button data-command-name="bold">Bold</button>
+        <button data-command-name="italic">Italic</button>
+        <button data-command-name="insertUnorderedList">List</button>
+
+        <!-- FIXME: Use custom elements for buttons... -->
+        <!-- <scribe-button command="bold">Bold</scribe-button> -->
+        <!-- <scribe-button command="italic">Italic</scribe-button> -->
+      </scribe-toolbar>
+
+      <!-- FIXME: whitespace in HTML confuses Scribe... -->
+      <scribe-content><p>Et malesuada fames ac turpis egestas sed tempus, urna et pharetra pharetra, massa massa ultricies mi, quis hendrerit dolor magna eget est lorem. Dignissim cras tincidunt lobortis feugiat vivamus at!</p><p>Some <em>nice</em> text here&hellip;</p></scribe-content>
+
+    </scribe-editor>
+
+
+    <textarea style="width:100%; height: 5em; margin-top: 2em;" value="{{html}}"></textarea>
+
+  </template>
+
 
 </body>
 </html>
